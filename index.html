@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Ahmed | Dynamic Profile</title>
+    
+    <title>Mohamed Ahmed | Profile</title>
+    <meta property="og:url" content="https://adminstrator070.github.io/MyProfile/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mohamed Ahmed | Accountant">
+    <meta property="og:description" content="Faculty of Commerce English Section - Sadat University">
+    <meta property="og:image" content="https://i.ibb.co/N6fvmskh/Picsart-25-02-27-21-26-01-491.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -17,7 +24,7 @@
             font-family: 'Cairo', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            user-select: none; 
+            user-select: none; /* لمنع التحديد وتحسين تجربة اللمس */
         }
 
         #particles-js {
@@ -57,6 +64,45 @@
             transition: width 2s ease-in-out;
         }
 
+        /* توهج الصورة الشخصية */
+        .profile-glow {
+            position: relative;
+            width: 150px; height: 150px;
+            margin: -75px auto 20px;
+            z-index: 20;
+        }
+        .profile-glow::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(45deg, #06b6d4, #3b82f6);
+            border-radius: 50%;
+            filter: blur(10px);
+            animation: breathingGlow 3s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes breathingGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* تأثير اللمس السحري */
+        .magic-touch {
+            position: absolute;
+            width: 15px; height: 15px;
+            border: 2px solid #06b6d4;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            animation: touch-anim 0.6s ease-out forwards;
+            z-index: 9999;
+        }
+        @keyframes touch-anim {
+            0% { width: 0; height: 0; opacity: 1; border-width: 4px; }
+            100% { width: 80px; height: 80px; opacity: 0; border-width: 1px; }
+        }
+
+        /* تأثير اللمعة على الأزرار */
         .shine-effect {
             position: relative;
             overflow: hidden;
@@ -77,48 +123,10 @@
             100% { left: 150%; }
         }
 
-        .profile-glow {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: -75px auto 20px;
-            z-index: 20;
-        }
-        .profile-glow::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            background: linear-gradient(45deg, #06b6d4, #3b82f6);
-            border-radius: 50%;
-            filter: blur(10px);
-            animation: breathingGlow 3s ease-in-out infinite;
-            z-index: -1;
-        }
-        @keyframes breathingGlow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
-
         .pubg-card {
             background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
             border-right: 4px solid #fbbf24;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-
-        /* تأثير اللمس السحري */
-        .magic-touch {
-            position: absolute;
-            width: 15px; height: 15px;
-            border: 2px solid #06b6d4;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            animation: touch-anim 0.6s ease-out forwards;
-            z-index: 9999;
-        }
-        @keyframes touch-anim {
-            0% { width: 0; height: 0; opacity: 1; border-width: 4px; }
-            100% { width: 80px; height: 80px; opacity: 0; border-width: 1px; }
         }
     </style>
 </head>
@@ -243,7 +251,7 @@
             setTimeout(animateSkills, 500);
         }
 
-        // كود الساعة 12 ساعة (AM/PM)
+        // ساعة 12 ساعة
         function updateClock() {
             const now = new Date();
             let h = now.getHours();
@@ -251,34 +259,38 @@
             let s = now.getSeconds();
             let ampm = h >= 12 ? 'PM' : 'AM';
             h = h % 12;
-            h = h ? h : 12; // الساعة 0 تصبح 12
+            h = h ? h : 12;
             h = h < 10 ? '0' + h : h;
             m = m < 10 ? '0' + m : m;
             s = s < 10 ? '0' + s : s;
             document.getElementById('clock').innerText = h + ":" + m + ":" + s + " " + ampm;
         }
 
+        // تحية ذكية
         function setGreeting() {
             const hour = new Date().getHours();
-            const greetingElement = document.getElementById('greeting');
-            greetingElement.innerText = (hour >= 5 && hour < 12) ? "صباح الخير، مرحباً بك في عالمي" : "مساء الخير، يسعدني تواصلك";
+            const g = document.getElementById('greeting');
+            g.innerText = (hour >= 5 && hour < 12) ? "صباح الخير، مرحباً بك في عالمي" : "مساء الخير، يسعدني تواصلك";
         }
 
+        // أنيميشن مهارات
         function animateSkills() {
             document.querySelectorAll('.skill-bar-fill').forEach(bar => {
                 bar.style.width = bar.getAttribute('data-width');
             });
         }
 
+        // تأثير لمس نيون
         document.addEventListener('click', function(e) {
-            const touch = document.createElement('div');
-            touch.className = 'magic-touch';
-            touch.style.left = e.pageX + 'px';
-            touch.style.top = e.pageY + 'px';
-            document.body.appendChild(touch);
-            setTimeout(() => touch.remove(), 600);
+            const t = document.createElement('div');
+            t.className = 'magic-touch';
+            t.style.left = e.pageX + 'px';
+            t.style.top = e.pageY + 'px';
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 600);
         });
 
+        // جزيئات الخلفية
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
