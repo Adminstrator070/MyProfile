@@ -3,82 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Ahmed</title>
+    <title>Mohamed Ahmed | Profile Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     
     <style>
-        body { background-color: #020617; color: white; font-family: sans-serif; overflow-x: hidden; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         
-        /* تحسين أداء النجوم */
-        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #020617; }
-        .star { position: absolute; background: white; border-radius: 50%; will-change: opacity, transform; animation: twinkle var(--duration) infinite ease-in-out; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
-
-        /* تحسين أداء الفقاعات */
-        .blob { position: absolute; width: 250px; height: 250px; filter: blur(70px); border-radius: 50%; z-index: -1; opacity: 0.1; will-change: transform; animation: move 15s infinite alternate linear; }
-        @keyframes move { from { transform: translate(0, 0); } to { transform: translate(30px, 30px); } }
-
-        .link-card {
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.2rem;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
         }
-        .link-card:active { transform: scale(0.95); } /* تأثير ضغطة الموبايل */
+
+        /* جزيئات الخلفية المتفاعلة */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* تأثير الزجاج المتطور */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            transition: 0.4s ease;
+        }
+
+        .glass-box:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* حلقة الصورة الشخصية النابضة */
+        .profile-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: -70px auto 20px;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            inset: -8px;
+            border: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        /* تأثير الكتابة */
+        .typewriter h2 {
+            overflow: hidden;
+            border-left: .15em solid #3b82f6;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .10em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #3b82f6; } }
+
+        /* ستايل بطاقة PUBG */
+        .pubg-card {
+            background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
+            border-left: 5px solid #fbbf24;
+            position: relative;
+        }
+        .pubg-card::after {
+            content: 'ID';
+            position: absolute;
+            left: 10px; top: 5px;
+            font-size: 40px; opacity: 0.1; font-weight: 900;
+        }
     </style>
 </head>
 <body>
 
-    <div class="stars-container" id="starsBox"></div>
-    <div class="blob" style="top: 10%; left: -5%; background: #3b82f6;"></div>
-    <div class="blob" style="bottom: 10%; right: -5%; background: #9333ea;"></div>
+    <div id="particles-js"></div>
 
-    <div class="max-w-md mx-auto px-6 py-8 relative z-10">
-        
-        <header class="text-center mb-10 animate__animated animate__fadeIn">
-            <div class="relative inline-block mb-6">
-                <div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-blue-500 to-purple-500 mx-auto overflow-hidden shadow-xl">
-                    <img src="https://i.ibb.co/4n0d4sNL/IMG-20260102-135622.jpg" class="w-full h-full rounded-full object-cover">
-                </div>
-                <div class="absolute bottom-2 right-2 bg-green-500 w-5 h-5 rounded-full border-4 border-[#020617]"></div>
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="glass-box w-full max-w-lg p-6 md:p-10 shadow-2xl mt-20 mb-10">
+            
+            <div class="profile-wrapper">
+                <div class="pulse-ring"></div>
+                <img src="https://i.ibb.co/N6fvmskh/Picsart-25-02-27-21-26-01-491.jpg" alt="Mohamed Ahmed" class="w-full h-full rounded-full object-cover border-4 border-gray-900 shadow-2xl relative z-10">
             </div>
-            <h1 class="text-3xl font-bold mb-2">Mohamed Ahmed</h1>
-            <p class="text-slate-400 text-sm">مرحباً بك في عالمي الرقمي</p>
-        </header>
 
-        <div class="grid grid-cols-1 gap-4 animate__animated animate__fadeInUp">
-            <a href="https://www.facebook.com/SIR.ACCT.MOHAMED07" target="_blank" class="link-card p-4 flex items-center gap-4">
-                <i class="fab fa-facebook text-blue-500 text-2xl"></i>
-                <span class="font-bold">فيسبوك</span>
-            </a>
-            <a href="https://www.instagram.com/mohamedahmedoffical07?igsh=MWZsem4zYWtmZWo4MA==" target="_blank" class="link-card p-4 flex items-center gap-4">
-                <i class="fab fa-instagram text-pink-500 text-2xl"></i>
-                <span class="font-bold">إنستجرام</span>
-            </a>
-            <a href="https://wa.me/+201551464665" target="_blank" class="link-card p-4 flex items-center gap-4">
-                <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
-                <span class="font-bold">واتساب</span>
-            </a>
-            <a href="https://whispa.sh/@MohamedAhmed07" target="_blank" class="link-card p-4 flex items-center gap-4">
-                <i class="fas fa-comment-dots text-yellow-500 text-2xl"></i>
-                <span class="font-bold">صراحة</span>
-            </a>
+            <div class="text-center typewriter">
+                <h1 class="text-4xl font-black mb-1 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent uppercase">
+                    Mohamed Ahmed
+                </h1>
+                <p class="text-blue-400 font-bold mb-6">Faculty of Commerce English Section</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-8">
+                <div class="glass-box p-4 text-center">
+                    <span class="text-gray-400 text-xs block mb-1 uppercase">العمر</span>
+                    <span class="text-xl font-bold">22 عاماً</span>
+                </div>
+                <div class="glass-box p-4 text-center">
+                    <span class="text-gray-400 text-xs block mb-1 uppercase">اللغات</span>
+                    <span class="text-xl font-bold">Ar & En</span>
+                </div>
+            </div>
+
+            <div class="pubg-card rounded-2xl p-5 mb-8 flex justify-between items-center shadow-lg">
+                <div>
+                    <span class="text-yellow-400 text-xs font-bold uppercase tracking-widest">PUBG MOBILE ID</span>
+                    <p class="text-2xl font-black tracking-tighter mt-1">5618281598</p>
+                </div>
+                <div class="bg-yellow-400/20 p-3 rounded-full text-yellow-400">
+                    <i class="fas fa-gamepad text-2xl"></i>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <a href="https://www.facebook.com/SIR.ACCT.MOHAMED07" target="_blank" class="w-full glass-box p-4 flex items-center justify-between hover:translate-x-2 transition-transform">
+                    <div class="flex items-center gap-4">
+                        <i class="fab fa-facebook-f text-blue-500 text-xl"></i>
+                        <span class="font-bold">Facebook</span>
+                    </div>
+                    <i class="fas fa-arrow-left text-gray-600 text-xs"></i>
+                </a>
+
+                <a href="https://www.instagram.com/mohamedahmedoffical07" target="_blank" class="w-full glass-box p-4 flex items-center justify-between hover:translate-x-2 transition-transform">
+                    <div class="flex items-center gap-4">
+                        <i class="fab fa-instagram text-pink-500 text-xl"></i>
+                        <span class="font-bold">Instagram</span>
+                    </div>
+                    <i class="fas fa-arrow-left text-gray-600 text-xs"></i>
+                </a>
+
+                <a href="https://wa.me/+201551464665" target="_blank" class="w-full glass-box p-4 flex items-center justify-between hover:translate-x-2 transition-transform">
+                    <div class="flex items-center gap-4">
+                        <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+                        <span class="font-bold">WhatsApp</span>
+                    </div>
+                    <i class="fas fa-arrow-left text-gray-600 text-xs"></i>
+                </a>
+
+                <a href="https://whispa.sh/@MohamedAhmed07" target="_blank" class="w-full glass-box p-4 flex items-center justify-between hover:translate-x-2 transition-transform">
+                    <div class="flex items-center gap-4">
+                        <i class="fas fa-comment-dots text-yellow-500 text-xl"></i>
+                        <span class="font-bold">صارحني</span>
+                    </div>
+                    <i class="fas fa-arrow-left text-gray-600 text-xs"></i>
+                </a>
+            </div>
+
+            <footer class="mt-12 text-center text-gray-600 text-[10px] tracking-[0.3em] uppercase">
+                &copy; 2026 Mohamed Ahmed
+            </footer>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        const starsBox = document.getElementById('starsBox');
-        for (let i = 0; i < 50; i++) { // قللنا العدد لـ 50 عشان السرعة
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            const size = Math.random() * 2 + 1;
-            star.style.width = size + 'px'; star.style.height = size + 'px';
-            star.style.setProperty('--duration', Math.random() * 3 + 2 + 's');
-            starsBox.appendChild(star);
-        }
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#3b82f6" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 3 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#3b82f6", "opacity": 0.4, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+            }
+        });
     </script>
 </body>
 </html>
