@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Mohamed Ahmed | Profile</title>
+    
+    <link rel="icon" type="image/jpg" href="https://i.ibb.co/N6fvmskh/Picsart-25-02-27-21-26-01-491.jpg">
+
     <meta property="og:url" content="https://adminstrator070.github.io/MyProfile/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Mohamed Ahmed | Accountant">
@@ -24,140 +27,132 @@
             font-family: 'Cairo', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            user-select: none; /* لمنع التحديد وتحسين تجربة اللمس */
+            user-select: none;
         }
 
-        #particles-js {
-            position: fixed;
-            width: 100%; height: 100%;
-            z-index: -1;
-        }
+        /* شريط التمرير النيون */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
 
-        .main-container {
-            animation: floatCard 6s ease-in-out infinite;
-        }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; }
 
-        @keyframes floatCard {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .glass-box {
+        /* تأثير الليزر على حواف الكارت */
+        .laser-card {
+            position: relative;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 35px;
-            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+        .laser-card::after {
+            content: ""; position: absolute; inset: -1.5px; border-radius: 35px; padding: 2px;
+            background: linear-gradient(90deg, transparent, #06b6d4, #3b82f6, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+            background-size: 200% 100%; animation: moveLaser 3s linear infinite; pointer-events: none; z-index: -1;
         }
 
-        /* ستايل أشرطة المهارات */
-        .skill-bar-bg {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-        .skill-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #06b6d4, #3b82f6);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
-            transition: width 2s ease-in-out;
+        /* ليزر صندوق الدعاء */
+        .laser-box-modal { position: relative; z-index: 10; }
+        .laser-box-modal::after {
+            content: ""; position: absolute; inset: -1.5px; border-radius: 24px; padding: 2px;
+            background: linear-gradient(90deg, transparent, #06b6d4, #3b82f6, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+            background-size: 200% 100%; animation: moveLaser 3s linear infinite; pointer-events: none; z-index: -1;
         }
 
-        /* توهج الصورة الشخصية */
-        .profile-glow {
-            position: relative;
-            width: 150px; height: 150px;
-            margin: -75px auto 20px;
-            z-index: 20;
+        /* إشعار النسخ */
+        #copy-toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: rgba(6, 182, 212, 0.95); color: white; padding: 12px 30px; border-radius: 50px;
+            font-weight: bold; font-size: 14px; z-index: 10000; box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+            opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .profile-glow::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            background: linear-gradient(45deg, #06b6d4, #3b82f6);
-            border-radius: 50%;
-            filter: blur(10px);
-            animation: breathingGlow 3s ease-in-out infinite;
-            z-index: -1;
-        }
-        @keyframes breathingGlow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-        }
+        #copy-toast.show { opacity: 1; visibility: visible; bottom: 60px; }
 
-        /* تأثير اللمس السحري */
-        .magic-touch {
-            position: absolute;
-            width: 15px; height: 15px;
-            border: 2px solid #06b6d4;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            animation: touch-anim 0.6s ease-out forwards;
-            z-index: 9999;
-        }
-        @keyframes touch-anim {
-            0% { width: 0; height: 0; opacity: 1; border-width: 4px; }
-            100% { width: 80px; height: 80px; opacity: 0; border-width: 1px; }
-        }
+        @keyframes moveLaser { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-        /* تأثير اللمعة على الأزرار */
-        .shine-effect {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-        }
+        .main-container { animation: floatCard 6s ease-in-out infinite; }
+        @keyframes floatCard { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+
+        .shine-effect { position: relative; overflow: hidden; }
         .shine-effect::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -100%;
-            width: 50%; height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-            animation: moveShine 4s infinite;
+            content: ''; position: absolute; top: -50%; left: -100%; width: 50%; height: 200%;
+            background: rgba(255, 255, 255, 0.1); transform: rotate(30deg); animation: moveShine 4s infinite;
         }
-        @keyframes moveShine {
-            0% { left: -100%; }
-            20% { left: 150%; }
-            100% { left: 150%; }
-        }
+        @keyframes moveShine { 0% { left: -100%; } 20% { left: 150%; } 100% { left: 150%; } }
 
-        .pubg-card {
-            background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%);
-            border-right: 4px solid #fbbf24;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        .typing-container { min-height: 40px; }
+        .cursor { display: inline-block; width: 3px; background-color: #06b6d4; margin-right: 5px; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .profile-glow { position: relative; width: 150px; height: 150px; margin: -75px auto 20px; z-index: 100; }
+        .profile-glow img { border: 4px solid #020617; border-radius: 50%; width: 100%; height: 100%; object-fit: cover; }
+        .profile-glow::before {
+            content: ''; position: absolute; inset: -8px; background: linear-gradient(45deg, #06b6d4, #3b82f6, #06b6d4);
+            border-radius: 50%; filter: blur(15px); animation: breathingGlow 3s ease-in-out infinite; z-index: -1; opacity: 0.8;
         }
+        @keyframes breathingGlow { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.9; transform: scale(1.1); } }
+
+        #duaa-modal {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center;
+            z-index: 9999; backdrop-filter: blur(15px); opacity: 0; visibility: hidden; transition: all 0.5s ease;
+        }
+        #duaa-modal.active { opacity: 1; visibility: visible; }
+
+        .magic-touch {
+            position: absolute; width: 15px; height: 15px; border: 2px solid #06b6d4; border-radius: 50%;
+            pointer-events: none; transform: translate(-50%, -50%); animation: touch-anim 0.6s ease-out forwards; z-index: 9998;
+        }
+        @keyframes touch-anim { 0% { width: 0; height: 0; opacity: 1; border-width: 4px; } 100% { width: 80px; height: 80px; opacity: 0; border-width: 1px; } }
+
+        .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #06b6d4, #3b82f6); border-radius: 10px; box-shadow: 0 0 10px rgba(6, 182, 212, 0.3); transition: width 2s ease-in-out; }
+        .pubg-card { background: linear-gradient(90deg, #1e1b4b 0%, #312e81 100%); border-right: 4px solid #fbbf24; }
     </style>
 </head>
 <body onload="initSite()">
 
     <div id="particles-js"></div>
 
-    <div class="fixed top-6 right-6 z-[100]">
-        <div id="clock" class="bg-black/60 px-4 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 text-xs font-mono tracking-widest shadow-[0_0_15px_rgba(6,182,212,0.2)]">00:00:00 AM</div>
+    <div id="copy-toast">تم نسخ الـ ID بنجاح! ✅</div>
+
+    <audio id="click-sound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="duaa-modal">
+        <div class="laser-box-modal bg-slate-900/90 p-8 max-w-sm w-full mx-4 text-center border border-cyan-500/30 animate__animated animate__zoomIn shadow-2xl rounded-3xl">
+            <i class="fas fa-heart text-4xl text-red-500 mb-4 animate-pulse"></i>
+            <h2 class="text-xl font-bold mb-4">دعاء</h2>
+            <p id="duaa-text" class="text-white text-lg font-bold mb-6 leading-relaxed italic"></p>
+            <button id="close-duaa-btn" onclick="closeDuaa(); playSound();" class="bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 rounded-full font-bold shadow-[0_0_15px_rgba(6,182,212,0.4)] hover:scale-105 transition-transform text-xs">شكرا علي الدعوه ولك بالمثل</button>
+        </div>
     </div>
 
-    <div class="min-h-screen flex items-center justify-center p-4">
-        <div class="main-container w-full max-w-lg mt-24 mb-10">
-            <div class="glass-box p-8 shadow-2xl">
+    <div class="fixed top-0 left-0 w-full flex flex-col items-center py-4 z-[100] bg-gradient-to-b from-[#020617] to-transparent">
+        <div id="clock" class="bg-black/60 px-6 py-1.5 rounded-full border border-cyan-500/30 text-cyan-400 text-sm font-mono tracking-widest shadow-[0_0_15px_rgba(6,182,212,0.2)] mb-2">00:00:00 AM</div>
+        <div class="flex gap-4">
+            <button onclick="saveVCard(); playSound();" class="text-[10px] bg-white/5 border border-white/10 px-3 py-1 rounded-full hover:bg-cyan-500/20 transition-all uppercase font-bold tracking-tighter"><i class="fas fa-user-plus ml-1"></i> Save Contact</button>
+            <button onclick="shareSite(); playSound();" class="text-[10px] bg-white/5 border border-white/10 px-3 py-1 rounded-full hover:bg-blue-500/20 transition-all uppercase font-bold tracking-tighter"><i class="fas fa-share-nodes ml-1"></i> Share Link</button>
+        </div>
+    </div>
+
+    <div class="min-h-screen flex items-center justify-center p-4 pt-32">
+        <div class="main-container w-full max-w-lg mt-10 mb-10">
+            <div class="laser-card p-8 shadow-2xl">
                 
                 <div class="profile-glow">
-                    <img src="https://i.ibb.co/N6fvmskh/Picsart-25-02-27-21-26-01-491.jpg" alt="Mohamed Ahmed" class="w-full h-full rounded-full object-cover object-top border-4 border-[#020617] relative z-10">
+                    <img src="https://i.ibb.co/N6fvmskh/Picsart-25-02-27-21-26-01-491.jpg" alt="Mohamed Ahmed">
                 </div>
 
                 <div class="text-center mb-8">
                     <div id="greeting" class="text-cyan-400 text-xs font-bold mb-2 tracking-widest animate__animated animate__fadeIn"></div>
-                    
-                    <h1 class="text-4xl font-black mb-1 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent uppercase animate__animated animate__fadeInDown">
-                        Mohamed Ahmed
-                    </h1>
-                    
-                    <p class="text-2xl font-black tracking-[0.2em] uppercase mb-1 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-sm">
-                        Accountant
-                    </p>
-                    
-                    <p class="text-indigo-300 text-sm font-bold opacity-80 uppercase leading-relaxed">
+                    <h1 class="text-4xl font-black mb-1 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent uppercase">Mohamed Ahmed</h1>
+                    <div class="typing-container text-2xl font-black tracking-[0.1em] uppercase bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-sm flex justify-center items-center">
+                        <span id="typed-text"></span><span class="cursor"></span>
+                    </div>
+                    <p class="text-indigo-300 text-sm font-bold opacity-80 uppercase leading-relaxed mt-2">
                         Faculty of Commerce English Section<br>
                         <span class="text-cyan-400">Sadat University</span>
                     </p>
@@ -165,72 +160,54 @@
 
                 <div class="mb-8 space-y-4">
                     <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400 border-b border-white/10 pb-2 mb-3">Professional Skills</h3>
-                    
                     <div>
                         <div class="flex justify-between text-[11px] mb-1 font-bold"><span>MS EXCEL</span><span class="text-cyan-400">95%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0;" data-width="95%"></div></div>
+                        <div class="h-[6px] bg-white/5 rounded-full"><div class="skill-bar-fill" style="width: 0;" data-width="95%"></div></div>
                     </div>
-
                     <div>
                         <div class="flex justify-between text-[11px] mb-1 font-bold"><span>MS WORD</span><span class="text-cyan-400">90%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0;" data-width="90%"></div></div>
+                        <div class="h-[6px] bg-white/5 rounded-full"><div class="skill-bar-fill" style="width: 0;" data-width="90%"></div></div>
                     </div>
-
                     <div>
                         <div class="flex justify-between text-[11px] mb-1 font-bold"><span>EXCEL PROGRAMMING (VBA)</span><span class="text-cyan-400">80%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 0;" data-width="80%"></div></div>
+                        <div class="h-[6px] bg-white/5 rounded-full"><div class="skill-bar-fill" style="width: 0;" data-width="80%"></div></div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="glass-box p-4 text-center border-cyan-500/20 animate__animated animate__fadeInLeft">
+                    <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
                         <span class="text-cyan-500 text-[10px] block mb-1 uppercase font-bold tracking-widest">Age</span>
                         <span class="text-xl font-black">22 عاماً</span>
                     </div>
-                    <div class="glass-box p-4 text-center border-blue-500/20 animate__animated animate__fadeInRight">
+                    <div class="bg-white/5 p-4 rounded-3xl text-center border border-white/10">
                         <span class="text-blue-500 text-[10px] block mb-1 uppercase font-bold tracking-widest">Lang</span>
-                        <span class="text-xl font-black">Ar & En</span>
+                        <span class="text-xl font-black uppercase">Ar & En</span>
                     </div>
                 </div>
 
-                <div class="pubg-card rounded-2xl p-5 mb-8 flex justify-between items-center animate__animated animate__pulse animate__infinite animate__slow">
+                <div class="pubg-card rounded-2xl p-5 mb-8 flex justify-between items-center shine-effect">
                     <div>
                         <span class="text-yellow-400 text-[10px] font-black uppercase tracking-[0.2em]">PUBG ID</span>
                         <p class="text-2xl font-black tracking-widest text-white mt-1">5618281598</p>
                     </div>
-                    <i class="fas fa-crosshairs text-3xl text-yellow-500 opacity-60"></i>
+                    <i onclick="copyPubgId();" class="fas fa-crosshairs text-3xl text-yellow-500 opacity-80 cursor-pointer hover:scale-125 transition-transform active:scale-95 active:text-white"></i>
                 </div>
 
                 <div class="space-y-4">
-                    <a href="https://www.facebook.com/SIR.ACCT.MOHAMED07" target="_blank" class="shine-effect glass-box p-4 flex items-center justify-between hover:bg-blue-600/10 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <i class="fab fa-facebook-f text-blue-500 text-2xl group-hover:rotate-[360deg] transition-transform duration-500"></i>
-                            <span class="font-bold text-lg">Facebook</span>
-                        </div>
+                    <a href="https://www.facebook.com/SIR.ACCT.MOHAMED07" onclick="playSound()" target="_blank" class="shine-effect bg-white/5 border border-white/10 p-4 flex items-center justify-between rounded-2xl hover:bg-blue-600/10 transition-all group">
+                        <div class="flex items-center gap-4"><i class="fab fa-facebook-f text-blue-500 text-2xl group-hover:rotate-[360deg] transition-all"></i><span class="font-bold text-lg text-white">Facebook</span></div>
                         <i class="fas fa-external-link-alt text-gray-700 text-xs"></i>
                     </a>
-
-                    <a href="https://www.instagram.com/mohamedahmedoffical07" target="_blank" class="shine-effect glass-box p-4 flex items-center justify-between hover:bg-pink-600/10 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <i class="fab fa-instagram text-pink-500 text-2xl group-hover:rotate-[360deg] transition-transform duration-500"></i>
-                            <span class="font-bold text-lg">Instagram</span>
-                        </div>
+                    <a href="https://www.instagram.com/mohamedahmedoffical07" onclick="playSound()" target="_blank" class="shine-effect bg-white/5 border border-white/10 p-4 flex items-center justify-between rounded-2xl hover:bg-pink-600/10 transition-all group">
+                        <div class="flex items-center gap-4"><i class="fab fa-instagram text-pink-500 text-2xl group-hover:rotate-[360deg] transition-all"></i><span class="font-bold text-lg text-white">Instagram</span></div>
                         <i class="fas fa-external-link-alt text-gray-700 text-xs"></i>
                     </a>
-
-                    <a href="https://wa.me/+201551464665" target="_blank" class="shine-effect glass-box p-4 flex items-center justify-between hover:bg-green-600/10 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <i class="fab fa-whatsapp text-green-500 text-2xl group-hover:rotate-[360deg] transition-transform duration-500"></i>
-                            <span class="font-bold text-lg">WhatsApp</span>
-                        </div>
+                    <a href="https://wa.me/+201551464665" onclick="playSound()" target="_blank" class="shine-effect bg-white/5 border border-white/10 p-4 flex items-center justify-between rounded-2xl hover:bg-green-600/10 transition-all group">
+                        <div class="flex items-center gap-4"><i class="fab fa-whatsapp text-green-500 text-2xl group-hover:rotate-[360deg] transition-all"></i><span class="font-bold text-lg text-white">WhatsApp</span></div>
                         <i class="fas fa-external-link-alt text-gray-700 text-xs"></i>
                     </a>
-
-                    <a href="https://whispa.sh/@MohamedAhmed07" target="_blank" class="shine-effect glass-box p-4 flex items-center justify-between hover:bg-yellow-600/10 transition-all group">
-                        <div class="flex items-center gap-4">
-                            <i class="fas fa-comment-dots text-yellow-500 text-2xl group-hover:rotate-[360deg] transition-transform duration-500"></i>
-                            <span class="font-bold text-lg">صارحني</span>
-                        </div>
+                    <a href="https://t.me/Pc_Programme_Pro_bot" onclick="playSound()" target="_blank" class="shine-effect bg-white/5 border border-white/10 p-4 flex items-center justify-between rounded-2xl hover:bg-sky-600/10 transition-all group">
+                        <div class="flex items-center gap-4"><i class="fab fa-telegram-plane text-sky-500 text-2xl group-hover:rotate-[360deg] transition-all duration-500"></i><span class="font-bold text-lg text-white">Telegram Bot</span></div>
                         <i class="fas fa-external-link-alt text-gray-700 text-xs"></i>
                     </a>
                 </div>
@@ -244,66 +221,121 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        function initSite() {
-            setGreeting();
-            updateClock();
-            setInterval(updateClock, 1000);
-            setTimeout(animateSkills, 500);
+        const prayers = ["اللهم لا تُخيّب له رجاء", "اللهم اجبر خاطره♥️", "اللهم أمانًا دائمًا له♥️", "اللهم نورًا في طريقه♥️", "اللهم جَبْرًا لقلبه♥️", "اللهم يسّر أمره واكتب له الخير♥️"];
+        const roles = ["Accountant"];
+        let roleIndex = 0, charIndex = 0, isDeleting = false;
+        let audioContextUnlocked = false;
+
+        function playSound() {
+            const sound = document.getElementById('click-sound');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => console.log("Sound muted by browser policy. Click anywhere to enable."));
+            }
         }
 
-        // ساعة 12 ساعة
+        // دالة "فتح قفل" الصوت في المتصفح
+        function unlockAudio() {
+            if (audioContextUnlocked) return;
+            const sound = document.getElementById('click-sound');
+            sound.play().then(() => {
+                sound.pause();
+                sound.currentTime = 0;
+                audioContextUnlocked = true;
+                console.log("Audio Unlocked");
+                document.removeEventListener('click', unlockAudio);
+                document.removeEventListener('touchstart', unlockAudio);
+            }).catch(e => console.log("Wait for interaction..."));
+        }
+
+        // استماع لأول لمسة لتفعيل الصوت
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+
+        function copyPubgId() {
+            const pubgId = "5618281598";
+            const textArea = document.createElement("textarea");
+            textArea.value = pubgId;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                playSound();
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 2000);
+            } catch (err) { console.error('Copy failed'); }
+            document.body.removeChild(textArea);
+        }
+
+        function initSite() {
+            setGreeting(); updateClock(); setInterval(updateClock, 1000); typeEffect();
+            setTimeout(() => { showDuaa(); animateSkills(); }, 1500);
+        }
+
+        function typeEffect() {
+            const current = roles[roleIndex];
+            const typed = document.getElementById("typed-text");
+            typed.textContent = isDeleting ? current.substring(0, charIndex - 1) : current.substring(0, charIndex + 1);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === current.length) { isDeleting = true; speed = 2000; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; speed = 500; }
+            setTimeout(typeEffect, speed);
+        }
+
+        function saveVCard() {
+            const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:Mohamed Ahmed\nTITLE:Accountant\nTEL;TYPE=CELL:+201551464665\nURL:https://adminstrator070.github.io/MyProfile/\nEND:VCARD";
+            const blob = new Blob([vcard], { type: "text/vcard" });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'Mohamed_Ahmed.vcf'; a.click();
+        }
+
+        function shareSite() {
+            if (navigator.share) {
+                navigator.share({ title: 'Mohamed Ahmed Profile', url: window.location.href });
+            } else { alert("Link copied!"); navigator.clipboard.writeText(window.location.href); }
+        }
+
+        function showDuaa() {
+            document.getElementById('duaa-text').innerText = prayers[Math.floor(Math.random() * prayers.length)];
+            document.getElementById('duaa-modal').classList.add('active');
+        }
+
+        function closeDuaa() { document.getElementById('duaa-modal').classList.remove('active'); }
+
         function updateClock() {
             const now = new Date();
-            let h = now.getHours();
-            let m = now.getMinutes();
-            let s = now.getSeconds();
-            let ampm = h >= 12 ? 'PM' : 'AM';
-            h = h % 12;
-            h = h ? h : 12;
-            h = h < 10 ? '0' + h : h;
-            m = m < 10 ? '0' + m : m;
-            s = s < 10 ? '0' + s : s;
-            document.getElementById('clock').innerText = h + ":" + m + ":" + s + " " + ampm;
+            let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+            let ampm = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
+            h = h < 10 ? '0' + h : h; m = m < 10 ? '0' + m : m; s = s < 10 ? '0' + s : s;
+            document.getElementById('clock').innerText = `${h}:${m}:${s} ${ampm}`;
         }
 
-        // تحية ذكية
         function setGreeting() {
-            const hour = new Date().getHours();
-            const g = document.getElementById('greeting');
-            g.innerText = (hour >= 5 && hour < 12) ? "صباح الخير، مرحباً بك في عالمي" : "مساء الخير، يسعدني تواصلك";
+            const h = new Date().getHours();
+            document.getElementById('greeting').innerText = (h >= 5 && h < 12) ? "صباح الخير، مرحباً بك في عالمي" : "مساء الخير، يسعدني تواصلك";
         }
 
-        // أنيميشن مهارات
-        function animateSkills() {
-            document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-                bar.style.width = bar.getAttribute('data-width');
-            });
-        }
+        function animateSkills() { document.querySelectorAll('.skill-bar-fill').forEach(bar => bar.style.width = bar.getAttribute('data-width')); }
 
-        // تأثير لمس نيون
+        // لمس الشاشة (السحر) + الصوت
         document.addEventListener('click', function(e) {
-            const t = document.createElement('div');
-            t.className = 'magic-touch';
-            t.style.left = e.pageX + 'px';
-            t.style.top = e.pageY + 'px';
-            document.body.appendChild(t);
-            setTimeout(() => t.remove(), 600);
+            const t = document.createElement('div'); t.className = 'magic-touch'; t.style.left = e.pageX + 'px'; t.style.top = e.pageY + 'px';
+            document.body.appendChild(t); setTimeout(() => t.remove(), 600);
+            
+            // تشغيل الصوت في كل مكان ماعدا فوق الروابط (عشان ميعملش دبل صوت)
+            if (!e.target.closest('a') && !e.target.closest('button') && !e.target.closest('i')) {
+                playSound();
+            }
         });
 
-        // جزيئات الخلفية
         particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 100, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#06b6d4" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.6, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#06b6d4", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 3, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
-            }
+            "particles": { "number": { "value": 80 }, "color": { "value": "#06b6d4" }, "opacity": { "value": 0.5 }, "size": { "value": 3 }, "line_linked": { "enable": true, "distance": 150, "color": "#06b6d4", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 2 } },
+            "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" } } }
         });
     </script>
 </body>
